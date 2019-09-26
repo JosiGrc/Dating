@@ -11,10 +11,13 @@ namespace Dating.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        public string Sex { get; set; }
-        public string SexualOrientation { get; set; }
+
+        [Display(Name = "My Zipcode is: ")]
         public int Location { get; set; }
 
         [ForeignKey("ApplicationUser")]

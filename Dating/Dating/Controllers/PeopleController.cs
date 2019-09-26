@@ -13,7 +13,13 @@ namespace Dating.Controllers
     public class PeopleController : Controller
     {
 
+        //Member Variables       
+
+
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        //Methods
+
 
         // GET: People
         public ActionResult Index()
@@ -27,7 +33,7 @@ namespace Dating.Controllers
         public ActionResult Details()
         {
             var personId = User.Identity.GetUserId();
-            var personInfo = db.People.Where(c => c.ApplicationId.ToString() == personId).SingleOrDefault();
+            var personInfo = db.People.Where(c => c.ApplicationId.ToString() == personId).FirstOrDefault();
             return View(personInfo);
         }
 
@@ -48,9 +54,9 @@ namespace Dating.Controllers
             {
                 db.People.Add(person);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");//In the furture when the User creates their account send them to their home page
             }
-            return View(person);           
+            return View("Preference");           
         }
 
         // GET: People/Edit/5
@@ -60,24 +66,24 @@ namespace Dating.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person customer = db.People.Find(id);
-            if (customer == null)
+            Person person = db.People.Find(id);
+            if (person == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(person);
         }
 
         // POST: People/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Sex,SexualOrientation,Location")] Person person)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Sex,SexualOrientation,Location,ApplicationId")] Person person)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(person).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             return View(person);
         }
@@ -98,14 +104,16 @@ namespace Dating.Controllers
         }
 
         // POST: People/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Person person = db.People.Find(id);
             db.People.Remove(person);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details");
         }
+
+
     }
 }

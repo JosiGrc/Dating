@@ -1,15 +1,17 @@
 ﻿@model Dating.Models.Person
 
 @{
-    ViewBag.Title = "Deatails";
+    ViewBag.Title = "Details";
 }
 
-<h2>Deatails</h2>
+<h2>Details</h2>
 
 <div>
     <h4>Person</h4>
     <hr />
     <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ApplicationId)
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -27,22 +29,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SexualOrientation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SexualOrientation)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Location)
         </dt>
 
@@ -54,5 +40,7 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Details", new { id = Model.Id }) |
+    @Html.ActionLink("Delete Account", "Delete", new { id = Model.Id })
+
 </p>

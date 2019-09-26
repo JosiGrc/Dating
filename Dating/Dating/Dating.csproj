@@ -178,11 +178,21 @@
     <Compile Include="Migrations\201909251306346_Made-person-model-with-needed-properties.Designer.cs">
       <DependentUpon>201909251306346_Made-person-model-with-needed-properties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909252007363_deleted-sex-and-sexual-preference-from-Person-model.cs" />
+    <Compile Include="Migrations\201909252007363_deleted-sex-and-sexual-preference-from-Person-model.Designer.cs">
+      <DependentUpon>201909252007363_deleted-sex-and-sexual-preference-from-Person-model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909261416002_added-two-more-prop-one-for-sexualPrerence-and-another-for-identity-both-linked-to-the-user.cs" />
+    <Compile Include="Migrations\201909261416002_added-two-more-prop-one-for-sexualPrerence-and-another-for-identity-both-linked-to-the-user.Designer.cs">
+      <DependentUpon>201909261416002_added-two-more-prop-one-for-sexualPrerence-and-another-for-identity-both-linked-to-the-user.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Indetify.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\SexualPreference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -245,7 +255,8 @@
     <Content Include="Views\People\Edit.cshtml" />
     <Content Include="Views\People\Create.cshtml" />
     <Content Include="Views\People\Delete.cshtml" />
-    <Content Include="Views\People\Deatails.cshtml" />
+    <Content Include="Views\People\Details.cshtml" />
+    <Content Include="Views\People\Preference.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -266,6 +277,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201909251306346_Made-person-model-with-needed-properties.resx">
       <DependentUpon>201909251306346_Made-person-model-with-needed-properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909252007363_deleted-sex-and-sexual-preference-from-Person-model.resx">
+      <DependentUpon>201909252007363_deleted-sex-and-sexual-preference-from-Person-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909261416002_added-two-more-prop-one-for-sexualPrerence-and-another-for-identity-both-linked-to-the-user.resx">
+      <DependentUpon>201909261416002_added-two-more-prop-one-for-sexualPrerence-and-another-for-identity-both-linked-to-the-user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
