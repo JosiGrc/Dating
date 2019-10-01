@@ -13,7 +13,7 @@ namespace Dating.Models
         public int Id { get; set; }
         public Genders Gender { get; set; }
         public Races Race { get; set; }
-        public string Personality { get; set; }
+        public Personalities Personality { get; set; }
 
         [ForeignKey("Person")]
         public int PersonId { get; set; }
@@ -24,7 +24,7 @@ namespace Dating.Models
             StraightMale,
             GayMale,
             StraightFemale,
-            GayFemale,
+            GayFemale
         }
 
         public enum Races
@@ -33,8 +33,13 @@ namespace Dating.Models
             African,
             BlackAMerican,
             Caucasian,
-            Hispanic
-            
+            Hispanic            
+        }
+        public enum Personalities
+        {
+            Introverted,
+            Extroverted,
+
         }
 
     }

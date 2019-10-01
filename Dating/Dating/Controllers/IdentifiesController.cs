@@ -18,7 +18,7 @@ namespace Dating.Controllers
         // GET: Identifies
         public ActionResult Index()
         {
-            var indetifies = db.Indetifies.Include(i => i.Person);
+            var indetifies = db.Indetifies.Include(i => i.PersonId);
             return View(indetifies.ToList());
         }
 
