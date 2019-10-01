@@ -46,17 +46,21 @@ namespace Dating.Controllers
         // POST: People/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Sex,SexualOrientation,Location")] Person person)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Age,Location,ApplicationId")] Person person)
         {
+            //Identify identify = new Identify();
             person.ApplicationId = User.Identity.GetUserId();
+            //person.Id = User.Identity.GetUserId();
+            //_ = new Identify {PersonId = person.Id};
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.People.Add(person);
                 db.SaveChanges();
-                return RedirectToAction("Details");//In the furture when the User creates their account send them to their home page
+                return RedirectToAction("Create", "Identifies");
             }
-            return View("Preference");           
+            return RedirectToAction("Create", "Identifies");
+
         }
 
         // GET: People/Edit/5
@@ -113,6 +117,11 @@ namespace Dating.Controllers
             db.SaveChanges();
             return RedirectToAction("Details");
         }
+
+        //public void GettingMatches()
+        //{
+        //    if()
+        //}
 
 
     }

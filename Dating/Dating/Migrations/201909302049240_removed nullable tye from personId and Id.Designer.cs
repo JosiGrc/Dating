@@ -7,13 +7,13 @@ namespace Dating.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Madepersonmodelwithneededproperties : IMigrationMetadata
+    public sealed partial class removednullabletyefrompersonIdandId : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Madepersonmodelwithneededproperties));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(removednullabletyefrompersonIdandId));
         
         string IMigrationMetadata.Id
         {
-            get { return "201909251306346_Made-person-model-with-needed-properties"; }
+            get { return "201909302049240_removed nullable tye from personId and Id"; }
         }
         
         string IMigrationMetadata.Source

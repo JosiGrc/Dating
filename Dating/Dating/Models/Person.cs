@@ -16,6 +16,7 @@ namespace Dating.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        public int Age { get; set; }
 
         [Display(Name = "My Zipcode is: ")]
         public int Location { get; set; }

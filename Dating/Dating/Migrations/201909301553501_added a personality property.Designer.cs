@@ -7,13 +7,13 @@ namespace Dating.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedtwomoreproponeforsexualPrerenceandanotherforidentitybothlinkedtotheuser : IMigrationMetadata
+    public sealed partial class addedapersonalityproperty : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedtwomoreproponeforsexualPrerenceandanotherforidentitybothlinkedtotheuser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addedapersonalityproperty));
         
         string IMigrationMetadata.Id
         {
-            get { return "201909261416002_added-two-more-prop-one-for-sexualPrerence-and-another-for-identity-both-linked-to-the-user"; }
+            get { return "201909301553501_added a personality property"; }
         }
         
         string IMigrationMetadata.Source

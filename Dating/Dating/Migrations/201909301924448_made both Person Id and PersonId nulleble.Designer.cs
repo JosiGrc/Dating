@@ -7,13 +7,13 @@ namespace Dating.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class deletedsexandsexualpreferencefromPersonmodel : IMigrationMetadata
+    public sealed partial class madebothPersonIdandPersonIdnulleble : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(deletedsexandsexualpreferencefromPersonmodel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(madebothPersonIdandPersonIdnulleble));
         
         string IMigrationMetadata.Id
         {
-            get { return "201909252007363_deleted-sex-and-sexual-preference-from-Person-model"; }
+            get { return "201909301924448_made both Person Id and PersonId nulleble"; }
         }
         
         string IMigrationMetadata.Source

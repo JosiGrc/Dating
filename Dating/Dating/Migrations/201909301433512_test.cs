@@ -3,10 +3,30 @@ namespace Dating.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Madepersonmodelwithneededproperties : DbMigration
+    public partial class test : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Identifies",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Male = c.Boolean(nullable: false),
+                        Female = c.Boolean(nullable: false),
+                        GayMan = c.Boolean(nullable: false),
+                        GayFemale = c.Boolean(nullable: false),
+                        Asian = c.Boolean(nullable: false),
+                        Black = c.Boolean(nullable: false),
+                        Indigenous = c.Boolean(nullable: false),
+                        White = c.Boolean(nullable: false),
+                        Hispanic = c.Boolean(nullable: false),
+                        PersonId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.People", t => t.PersonId, cascadeDelete: true)
+                .Index(t => t.PersonId);
+            
             CreateTable(
                 "dbo.People",
                 c => new
@@ -14,8 +34,7 @@ namespace Dating.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        Sex = c.String(),
-                        SexualOrientation = c.String(),
+                        Age = c.Int(nullable: false),
                         Location = c.Int(nullable: false),
                         ApplicationId = c.String(maxLength: 128),
                     })
@@ -91,15 +110,33 @@ namespace Dating.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.SexualPreferences",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Male = c.Boolean(nullable: false),
+                        Female = c.Boolean(nullable: false),
+                        GayMale = c.Boolean(nullable: false),
+                        GayFemale = c.Boolean(nullable: false),
+                        PersonId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.People", t => t.PersonId, cascadeDelete: true)
+                .Index(t => t.PersonId);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.SexualPreferences", "PersonId", "dbo.People");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Identifies", "PersonId", "dbo.People");
             DropForeignKey("dbo.People", "ApplicationId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropIndex("dbo.SexualPreferences", new[] { "PersonId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -107,12 +144,15 @@ namespace Dating.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.People", new[] { "ApplicationId" });
+            DropIndex("dbo.Identifies", new[] { "PersonId" });
+            DropTable("dbo.SexualPreferences");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.People");
+            DropTable("dbo.Identifies");
         }
     }
 }
