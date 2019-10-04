@@ -12,17 +12,35 @@ namespace Dating.Models
         [Key]
 
         public int Id { get; set; }
-        [Display(Name = "A male")]
-        public bool Male { get; set; }
-        [Display(Name = "A Female")]
-        public bool Female { get; set; }
-        [Display(Name = "A gay man")]
-        public bool GayMale { get; set; }
-        [Display(Name = "A gay woman")]
-        public bool GayFemale { get; set; }
+        public WantedGenders Gender { get; set; }
+        public WantedRaces Race { get; set; }
+        public WantedPersonalities Personality { get; set; }
+        public int Age { get; set; }
 
-        [ForeignKey("Person")]
-        public int PersonId { get; set; }
-        public Person Person { get; set; }
+
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+    }
+    public enum WantedGenders
+    {
+        StraightMale,
+        GayMale,
+        StraightFemale,
+        GayFemale
+    }
+
+    public enum WantedRaces
+    {
+        Asian,
+        African,
+        BlackAMerican,
+        Caucasian,
+        Hispanic
+    }
+    public enum WantedPersonalities
+    {
+        Introverted,
+        Extroverted
     }
 }

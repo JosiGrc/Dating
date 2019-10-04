@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,12 +17,18 @@ namespace Dating.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public static implicit operator string(ApplicationUser v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        
         public DbSet<Person> People { get; set; }
-        public DbSet<Identify> Indetifies { get; set; }
+        public DbSet<Identify> Identifies { get; set; }
         public DbSet<SexualPreference> SexualPreferences { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

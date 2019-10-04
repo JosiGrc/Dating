@@ -12,19 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Person.FirstName)
+            @Html.DisplayNameFor(model => model.Age)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Male)
+            @Html.DisplayNameFor(model => model.Gender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Female)
+            @Html.DisplayNameFor(model => model.Personality)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GayMan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GayFemale)
+            @Html.DisplayNameFor(model => model.Race)
         </th>
         <th></th>
     </tr>
@@ -32,20 +29,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Person.FirstName)
+            @Html.DisplayFor(modelItem => item.Gender)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Male)
+            @Html.DisplayFor(modelItem => item.Personality)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Female)
+            @Html.DisplayFor(modelItem => item.Race)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GayMan)
+            @Html.DisplayFor(modelItem => item.Age)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GayFemale)
-        </td>
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Dating.Models;
+using Dating.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace Dating.Controllers
@@ -18,7 +19,7 @@ namespace Dating.Controllers
         // GET: Identifies
         public ActionResult Index()
         {
-            var indetifies = db.Indetifies.Include(i => i.PersonId);
+            var indetifies = db.Identifies.Include(i => i.ApplicationId);
             return View(indetifies.ToList());
         }
 
@@ -29,7 +30,7 @@ namespace Dating.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Identify identify = db.Indetifies.Find(id);
+            Identify identify = db.Identifies.Find(id);
             if (identify == null)
             {
                 return HttpNotFound();
@@ -48,20 +49,20 @@ namespace Dating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Male,Female,GayMan,GayFemale,PeopleId,Person.Id,FirstName,LastName,Age,Location,ApplicationId")] Identify identify, Person person)
+        public ActionResult Create(PeopleViewModels peopleViewModels)
         {
-            //ViewBag.PeopleId = db.People.Where(p => p.ApplicationId.ToString() == identify.PersonId.ToString()).FirstOrDefault();
-            //find person in DB who is logged into app 
-            _ = User.Identity.GetUserId();
-            identify.PersonId = person.Id;
-            //identify.personID = ID on person model
+
+            Identify identify = peopleViewModels.Identify;
+            //identify.ApplicationId = peopleViewModels.Person.ApplicationId;
+            
+
             if (ModelState.IsValid)  
             {
-                db.Indetifies.Add(identify);
+                db.Identifies.Add(identify);
                 db.SaveChanges();//There are FK conflicts here
                 return RedirectToAction("Create");
             }
-            return RedirectToAction("Create", "SexualPreferences");
+            return RedirectToAction("Create");
         }
 
         // GET: Identifies/Edit/5
@@ -71,12 +72,12 @@ namespace Dating.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Identify identify = db.Indetifies.Find(id);
+            Identify identify = db.Identifies.Find(id);
             if (identify == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", identify.PersonId);
+            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", identify.ApplicationId);
             return View(identify);
         }
 
@@ -85,7 +86,7 @@ namespace Dating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Male,Female,GayMan,GayFemale,PersonId")] Identify identify)
+        public ActionResult Edit([Bind(Include = "Id,Gender,Race,Personality,PersonId")] Identify identify)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +94,7 @@ namespace Dating.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", identify.PersonId);
+            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", identify.ApplicationId);
             return View(identify);
         }
 
@@ -104,7 +105,7 @@ namespace Dating.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Identify identify = db.Indetifies.Find(id);
+            Identify identify = db.Identifies.Find(id);
             if (identify == null)
             {
                 return HttpNotFound();
@@ -117,8 +118,8 @@ namespace Dating.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Identify identify = db.Indetifies.Find(id);
-            db.Indetifies.Remove(identify);
+            Identify identify = db.Identifies.Find(id);
+            db.Identifies.Remove(identify);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

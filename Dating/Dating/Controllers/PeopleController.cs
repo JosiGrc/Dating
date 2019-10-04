@@ -1,4 +1,5 @@
 ﻿using Dating.Models;
+using Dating.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,7 @@ namespace Dating.Controllers
     public class PeopleController : Controller
     {
 
-        //Member Variables       
-
+        //Member Variables            
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -40,24 +40,28 @@ namespace Dating.Controllers
         // GET: People/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
         // POST: People/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Age,Location,ApplicationId")] Person person)
+        public ActionResult Create(PeopleViewModels peopleViewModels)
         {
-            //Identify identify = new Identify();
-            person.ApplicationId = User.Identity.GetUserId();
-            //person.Id = User.Identity.GetUserId();
-            //_ = new Identify {PersonId = person.Id};
+            Person person = peopleViewModels.Person;
+            //Identify identify = peopleViewModels.Identify;
+            //SexualPreference sexualPreference = peopleViewModels.SexualPreference;
+       
+            peopleViewModels.Person.ApplicationId = User.Identity.GetUserId();
+            //peopleViewModels.Identify.ApplicationId = User.Identity.GetUserId();
+
 
             if (ModelState.IsValid)
             {
                 db.People.Add(person);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Identifies");
+                return RedirectToAction("Details");
             }
             return RedirectToAction("Create", "Identifies");
 
@@ -81,7 +85,7 @@ namespace Dating.Controllers
         // POST: People/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Sex,SexualOrientation,Location,ApplicationId")] Person person)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Age,Location,ApplicationId")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -118,10 +122,14 @@ namespace Dating.Controllers
             return RedirectToAction("Details");
         }
 
-        //public void GettingMatches()
-        //{
-        //    if()
-        //}
+        public void GettingMatches(Identify identify)
+        {
+            Person person = new Person();
+            var possibleMatches = db.SexualPreferences.Where(s => s.Age == identify.Age && s.Gender.ToString() == identify.Gender.ToString() && s.Race.ToString() == identify.Race.ToString() && s.Personality.ToString() == identify.Personality.ToString());
+            //var namesOfMatches = db.SexualPreferences.Find(User.Identity.GetUserId);
+
+
+        }
 
 
     }

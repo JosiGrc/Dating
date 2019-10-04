@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Web;
 
 namespace Dating.Models
 {
@@ -11,36 +9,35 @@ namespace Dating.Models
     {
         [Key]
         public int Id { get; set; }
+        public int Age { get; set; }
+
         public Genders Gender { get; set; }
         public Races Race { get; set; }
         public Personalities Personality { get; set; }
 
-        [ForeignKey("Person")]
-        public int PersonId { get; set; }
-        public Person Person { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+    }
+    public enum Genders
+    {
+        StraightMale,
+        GayMale,
+        StraightFemale,
+        GayFemale
+    }
 
-        public enum Genders
-        {
-            StraightMale,
-            GayMale,
-            StraightFemale,
-            GayFemale
-        }
-
-        public enum Races
-        {
-            Asian, 
-            African,
-            BlackAMerican,
-            Caucasian,
-            Hispanic            
-        }
-        public enum Personalities
-        {
-            Introverted,
-            Extroverted,
-
-        }
-
+    public enum Races
+    {
+        Asian,
+        African,
+        BlackAmerican,
+        Caucasian,
+        Hispanic
+    }
+    public enum Personalities
+    {
+        Introverted,
+        Extroverted,
     }
 }

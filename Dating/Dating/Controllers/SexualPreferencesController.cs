@@ -17,7 +17,7 @@ namespace Dating.Controllers
         // GET: SexualPreferences
         public ActionResult Index()
         {
-            var sexualPreferences = db.SexualPreferences.Include(s => s.Person);
+            var sexualPreferences = db.SexualPreferences.Include(s => s.ApplicationId);
             return View(sexualPreferences.ToList());
         }
 
@@ -57,7 +57,7 @@ namespace Dating.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", sexualPreference.PersonId);
+            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", sexualPreference.ApplicationId);
             return View(sexualPreference);
         }
 
@@ -73,7 +73,7 @@ namespace Dating.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", sexualPreference.PersonId);
+            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", sexualPreference.ApplicationId);
             return View(sexualPreference);
         }
 
@@ -90,7 +90,7 @@ namespace Dating.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", sexualPreference.PersonId);
+            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", sexualPreference.ApplicationId);
             return View(sexualPreference);
         }
 
