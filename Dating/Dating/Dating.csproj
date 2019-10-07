@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -54,6 +57,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -216,53 +220,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909301433512_test.cs" />
-    <Compile Include="Migrations\201909301433512_test.Designer.cs">
-      <DependentUpon>201909301433512_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909301553501_added a personality property.cs" />
-    <Compile Include="Migrations\201909301553501_added a personality property.Designer.cs">
-      <DependentUpon>201909301553501_added a personality property.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909301924448_made both Person Id and PersonId nulleble.cs" />
-    <Compile Include="Migrations\201909301924448_made both Person Id and PersonId nulleble.Designer.cs">
-      <DependentUpon>201909301924448_made both Person Id and PersonId nulleble.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909302049240_removed nullable tye from personId and Id.cs" />
-    <Compile Include="Migrations\201909302049240_removed nullable tye from personId and Id.Designer.cs">
-      <DependentUpon>201909302049240_removed nullable tye from personId and Id.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910011316463_made race and gender both enums.cs" />
-    <Compile Include="Migrations\201910011316463_made race and gender both enums.Designer.cs">
-      <DependentUpon>201910011316463_made race and gender both enums.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910011414073_test1.cs" />
-    <Compile Include="Migrations\201910011414073_test1.Designer.cs">
-      <DependentUpon>201910011414073_test1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910011450073_changed properties to enumas with different names.cs" />
-    <Compile Include="Migrations\201910011450073_changed properties to enumas with different names.Designer.cs">
-      <DependentUpon>201910011450073_changed properties to enumas with different names.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910012009083_test2.cs" />
-    <Compile Include="Migrations\201910012009083_test2.Designer.cs">
-      <DependentUpon>201910012009083_test2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910022022373_test3.cs" />
-    <Compile Include="Migrations\201910022022373_test3.Designer.cs">
-      <DependentUpon>201910022022373_test3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910041236086_added a list of type person to the Person model.cs" />
-    <Compile Include="Migrations\201910041236086_added a list of type person to the Person model.Designer.cs">
-      <DependentUpon>201910041236086_added a list of type person to the Person model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910041247407_added age property to the Identify model.cs" />
-    <Compile Include="Migrations\201910041247407_added age property to the Identify model.Designer.cs">
-      <DependentUpon>201910041247407_added age property to the Identify model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910041257572_added age property to the Sexual Prefenrence model.cs" />
-    <Compile Include="Migrations\201910041257572_added age property to the Sexual Prefenrence model.Designer.cs">
-      <DependentUpon>201910041257572_added age property to the Sexual Prefenrence model.cs</DependentUpon>
+    <Compile Include="Hubs\ChatHub.cs" />
+    <Compile Include="Migrations\201910041817581_test.cs" />
+    <Compile Include="Migrations\201910041817581_test.Designer.cs">
+      <DependentUpon>201910041817581_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -285,6 +246,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\signalr.js" />
+    <Content Include="Scripts\signalr.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
@@ -307,7 +270,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\GeoCodingApi.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -369,6 +334,9 @@
     <Content Include="Views\ViewModels\PeopleCreate.cshtml" />
     <Content Include="Views\ViewModels\PeopleCreating.cshtml" />
     <Content Include="Views\Identifies\Create.cshtml" />
+    <Content Include="Views\People\Search.cshtml" />
+    <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\People\SearchForPeople.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -390,41 +358,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909301433512_test.resx">
-      <DependentUpon>201909301433512_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909301553501_added a personality property.resx">
-      <DependentUpon>201909301553501_added a personality property.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909301924448_made both Person Id and PersonId nulleble.resx">
-      <DependentUpon>201909301924448_made both Person Id and PersonId nulleble.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909302049240_removed nullable tye from personId and Id.resx">
-      <DependentUpon>201909302049240_removed nullable tye from personId and Id.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910011316463_made race and gender both enums.resx">
-      <DependentUpon>201910011316463_made race and gender both enums.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910011414073_test1.resx">
-      <DependentUpon>201910011414073_test1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910011450073_changed properties to enumas with different names.resx">
-      <DependentUpon>201910011450073_changed properties to enumas with different names.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910012009083_test2.resx">
-      <DependentUpon>201910012009083_test2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910022022373_test3.resx">
-      <DependentUpon>201910022022373_test3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910041236086_added a list of type person to the Person model.resx">
-      <DependentUpon>201910041236086_added a list of type person to the Person model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910041247407_added age property to the Identify model.resx">
-      <DependentUpon>201910041247407_added age property to the Identify model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910041257572_added age property to the Sexual Prefenrence model.resx">
-      <DependentUpon>201910041257572_added age property to the Sexual Prefenrence model.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910041817581_test.resx">
+      <DependentUpon>201910041817581_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

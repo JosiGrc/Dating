@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Dating.Models;
+using Dating.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Dating.Controllers
 {
@@ -39,8 +41,11 @@ namespace Dating.Controllers
         // GET: SexualPreferences/Create
         public ActionResult Create()
         {
-            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName");
-            return View();
+            PeopleViewModels identifyInfo = new PeopleViewModels()
+            {
+                SexualPreference = new SexualPreference()
+            };
+            return View(identifyInfo);
         }
 
         // POST: SexualPreferences/Create
@@ -48,17 +53,19 @@ namespace Dating.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Male,Female,GayMale,GayFemale,PersonId")] SexualPreference sexualPreference)
+        public ActionResult Create(PeopleViewModels peopleViewModels)
         {
+            SexualPreference sexualPreference = peopleViewModels.SexualPreference;
+            sexualPreference.ApplicationId = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
                 db.SexualPreferences.Add(sexualPreference);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "People");
             }
+            return RedirectToAction("Index");
 
-            ViewBag.PersonId = new SelectList(db.People, "Id", "FirstName", sexualPreference.ApplicationId);
-            return View(sexualPreference);
         }
 
         // GET: SexualPreferences/Edit/5

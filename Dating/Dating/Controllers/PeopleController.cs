@@ -4,10 +4,12 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 
 namespace Dating.Controllers
 {
@@ -49,19 +51,14 @@ namespace Dating.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(PeopleViewModels peopleViewModels)
         {
-            Person person = peopleViewModels.Person;
-            //Identify identify = peopleViewModels.Identify;
-            //SexualPreference sexualPreference = peopleViewModels.SexualPreference;
-       
-            peopleViewModels.Person.ApplicationId = User.Identity.GetUserId();
-            //peopleViewModels.Identify.ApplicationId = User.Identity.GetUserId();
-
+            Person person = peopleViewModels.Person;      
+            person.ApplicationId = User.Identity.GetUserId();
 
             if (ModelState.IsValid)
             {
                 db.People.Add(person);
                 db.SaveChanges();
-                return RedirectToAction("Details");
+                return RedirectToAction("Create", "Identifies");
             }
             return RedirectToAction("Create", "Identifies");
 
@@ -122,15 +119,48 @@ namespace Dating.Controllers
             return RedirectToAction("Details");
         }
 
-        public void GettingMatches(Identify identify)
+        public void GettingMatches(Identify identify, SexualPreference sexualPreference)
         {
             Person person = new Person();
             var possibleMatches = db.SexualPreferences.Where(s => s.Age == identify.Age && s.Gender.ToString() == identify.Gender.ToString() && s.Race.ToString() == identify.Race.ToString() && s.Personality.ToString() == identify.Personality.ToString());
-            //var namesOfMatches = db.SexualPreferences.Find(User.Identity.GetUserId);
+            var userId = User.Identity.GetUserId();
+            var percent = possibleMatches.Count();
+            if (percent > 2)
+            {
+                if (person.ApplicationId == userId && person.ApplicationId == sexualPreference.ApplicationId)
+            {
+                person.Matches.Add(person.FirstName);
+            }
+            }
 
-
+            
         }
 
+  
+        public ActionResult SearchForPeople(string searchString, string sortOrder)
+        {
+            Person person = new Person();
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var searchingPeople = from p in db.People select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var searchedPeople = db.People.Where(p => p.FirstName.Contains(searchString) || p.FirstName.Contains(searchString));
+
+                switch (sortOrder)
+                {
+                    case "person.FirstName":
+                        searchedPeople = searchedPeople.OrderByDescending(s => s.FirstName);
+                        break;
+                    case "person.LastName":
+                        searchedPeople = searchedPeople.Where(s => s.LastName == person.LastName);
+                        break;
+                    default:
+                        searchedPeople = searchedPeople.OrderBy(s => s.LastName);
+                        break;
+                }
+            }           
+            return View(searchingPeople);
+        }
 
     }
 }

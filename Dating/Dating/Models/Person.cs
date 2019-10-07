@@ -9,8 +9,10 @@ namespace Dating.Models
 {
     public class Person
     {
+
         [Key]
         public int Id { get; set; }
+
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -20,7 +22,7 @@ namespace Dating.Models
         [Display(Name = "My Zipcode is: ")]
         public int Location { get; set; }
 
-        public List<Person> Matches { get; set; }
+        public List<string> Matches { get; set; }
 
 
         [ForeignKey("ApplicationUser")]

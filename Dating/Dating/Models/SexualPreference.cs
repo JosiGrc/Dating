@@ -12,9 +12,17 @@ namespace Dating.Models
         [Key]
 
         public int Id { get; set; }
+
+        [Display(Name = "I am looking for: ")]
         public WantedGenders Gender { get; set; }
+
+        [Display(Name = "I am looking for: ")]
         public WantedRaces Race { get; set; }
-        public WantedPersonalities Personality { get; set; }
+
+        [Display(Name = "I am looking for: ")]
+        public WantedPersonalities Personality { get; set; } 
+
+        [Display(Name = "I am looking for: ")]
         public int Age { get; set; }
 
 

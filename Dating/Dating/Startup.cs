@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin;
+using SignalRChat.Hubs;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(Dating.Startup))]
@@ -9,6 +10,7 @@ namespace Dating
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }

@@ -12,17 +12,11 @@ namespace Dating.ViewModels
 {
     public class PeopleViewModels
     {
-
-
         public Person Person { get; set; }       
-
-     
-        
 
         public Identify Identify { get; set; }
 
         public SexualPreference SexualPreference { get; set; }
-
         
     }
 }

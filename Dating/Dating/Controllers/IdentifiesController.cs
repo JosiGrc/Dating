@@ -41,7 +41,11 @@ namespace Dating.Controllers
         // GET: Identifies/Create
         public ActionResult Create()
         {
-            return View();
+            PeopleViewModels peopleViewModels = new PeopleViewModels()
+            {
+                Identify = new Identify()
+            };
+            return View(peopleViewModels);
         }
 
         // POST: Identifies/Create
@@ -53,16 +57,15 @@ namespace Dating.Controllers
         {
 
             Identify identify = peopleViewModels.Identify;
-            //identify.ApplicationId = peopleViewModels.Person.ApplicationId;
-            
+            identify.ApplicationId = User.Identity.GetUserId();            
 
             if (ModelState.IsValid)  
             {
                 db.Identifies.Add(identify);
-                db.SaveChanges();//There are FK conflicts here
-                return RedirectToAction("Create");
+                db.SaveChanges();
+                return RedirectToAction("Create", "SexualPreferences");
             }
-            return RedirectToAction("Create");
+            return RedirectToAction("Error");
         }
 
         // GET: Identifies/Edit/5

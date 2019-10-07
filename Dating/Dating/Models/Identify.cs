@@ -9,10 +9,17 @@ namespace Dating.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "My age is : ")]
         public int Age { get; set; }
 
+        [Display(Name = "My gender is : ")]
         public Genders Gender { get; set; }
+
+        [Display(Name = "I am : ")]
         public Races Race { get; set; }
+
+        [Display(Name = "I am : ")]
         public Personalities Personality { get; set; }
 
         [ForeignKey("ApplicationUser")]
