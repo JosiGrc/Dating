@@ -128,38 +128,24 @@ namespace Dating.Controllers
             if (percent > 2)
             {
                 if (person.ApplicationId == userId && person.ApplicationId == sexualPreference.ApplicationId)
-            {
-                person.Matches.Add(person.FirstName);
-            }
-            }
 
-            
+                {
+                    person.Matches.Add(person.FirstName);
+                }
+            }
+                        
         }
 
   
-        public ActionResult SearchForPeople(string searchString, string sortOrder)
+        public ActionResult SearchedPeople(string searchString)
         {
+            PeopleViewModels peopleViewModels = new PeopleViewModels();
             Person person = new Person();
-            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            var searchingPeople = from p in db.People select p;
             if (!String.IsNullOrEmpty(searchString))
             {
-                var searchedPeople = db.People.Where(p => p.FirstName.Contains(searchString) || p.FirstName.Contains(searchString));
-
-                switch (sortOrder)
-                {
-                    case "person.FirstName":
-                        searchedPeople = searchedPeople.OrderByDescending(s => s.FirstName);
-                        break;
-                    case "person.LastName":
-                        searchedPeople = searchedPeople.Where(s => s.LastName == person.LastName);
-                        break;
-                    default:
-                        searchedPeople = searchedPeople.OrderBy(s => s.LastName);
-                        break;
-                }
+                var searchedPeople = db.People.Where(p => p.FirstName.Contains(searchString) || p.LastName.Contains(searchString));
             }           
-            return View(searchingPeople);
+            return View("SearchedPeople");
         }
 
     }
