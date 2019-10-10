@@ -6,12 +6,31 @@
 
 <h2>Details</h2>
 
+@*<form method="post" >
+    <label for="firstName">Name of the person you might know</label>
+    <input type="text" id="firstName" placeholder="Search People" name="searchString" />
+    <input type="submit"
+    onclick="location.href='@Url.Action("SearchedPeople", "People")'" />
+</form>*@
+
+
+<div class="topnav">
+    <input type="text" placeholder="Search People">
+    <input type="button"
+           value="Submit"
+           onclick="location.href='@Url.Action("SearchedPeople", "People")'" />
+</div>
+
+@*<input type="button" value="Create" onclick="location.href='@Url.Action("SearchedPeople", "People")'" />*@
+
 <div>
     <h4>Person</h4>
     <hr />
     <dl class="dl-horizontal">
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.ApplicationId)
+        @Html.HiddenFor(model => model.Matches)
+
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -39,7 +58,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("See possible matches", "SearchForPeople") |
+    @Html.ActionLink("See possible matches", "Matches") |
+    @Html.ActionLink("Chat", "SignalRChatAPI") |
     @Html.ActionLink("Edit", "Edit") |
     @Html.ActionLink("Delete Account", "Delete")
 

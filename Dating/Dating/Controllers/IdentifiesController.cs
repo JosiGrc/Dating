@@ -54,7 +54,7 @@ namespace Dating.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PeopleViewModels peopleViewModels)
-        {
+          {
 
             Identify identify = peopleViewModels.Identify;
             identify.ApplicationId = User.Identity.GetUserId();            

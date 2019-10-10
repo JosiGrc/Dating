@@ -36,6 +36,7 @@ namespace Dating.Controllers
         {
             var personId = User.Identity.GetUserId();
             var personInfo = db.People.Where(c => c.ApplicationId.ToString() == personId).FirstOrDefault();
+            //var searchString = "";
             return View(personInfo);
         }
 
@@ -119,34 +120,60 @@ namespace Dating.Controllers
             return RedirectToAction("Details");
         }
 
-        public void GettingMatches(Identify identify, SexualPreference sexualPreference)
+        public ActionResult Matches(Identify identify)
         {
             Person person = new Person();
-            var possibleMatches = db.SexualPreferences.Where(s => s.Age == identify.Age && s.Gender.ToString() == identify.Gender.ToString() && s.Race.ToString() == identify.Race.ToString() && s.Personality.ToString() == identify.Personality.ToString());
-            var userId = User.Identity.GetUserId();
-            var percent = possibleMatches.Count();
-            if (percent > 2)
-            {
-                if (person.ApplicationId == userId && person.ApplicationId == sexualPreference.ApplicationId)
+            SexualPreference sexualPreference = new SexualPreference();  
 
+            IEnumerable<Person> matchedPeople = db.People;
+
+            if (identify.Age == sexualPreference.Age)
+            {
+                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
+            }
+            else if(identify.Gender.Equals(sexualPreference.Gender))
+            {
+                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
+            }
+            else if (identify.Personality.Equals(sexualPreference.Personality))
+            {
+                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
+            }
+            else if (identify.Race.Equals(sexualPreference.Race))
+            {
+                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
+            }
+
+            return View(matchedPeople);
+        }
+
+
+        public ActionResult SearchedPeople(string searchString) 
+        {
+            Person person = new Person();
+
+            IEnumerable<Person> searchedPeople = db.People;
+
+            foreach(Person item in searchedPeople)
+            {
+                if(!String.IsNullOrEmpty(searchString))
                 {
-                    person.Matches.Add(person.FirstName);
+                    searchedPeople = db.People.Where(p => p.FirstName.Contains(searchString));
+                    return View(searchedPeople);
                 }
             }
-                        
+            return View(searchedPeople);
+
         }
 
-  
-        public ActionResult SearchedPeople(string searchString)
+        public ActionResult SignalRChatAPI()
         {
-            PeopleViewModels peopleViewModels = new PeopleViewModels();
-            Person person = new Person();
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var searchedPeople = db.People.Where(p => p.FirstName.Contains(searchString) || p.LastName.Contains(searchString));
-            }           
-            return View("SearchedPeople");
+            return View();
         }
 
+        public ActionResult GoogleGeoCodeAPI()
+        {
+            return View();
+        }
     }
 }

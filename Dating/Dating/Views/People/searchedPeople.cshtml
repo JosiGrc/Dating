@@ -1,58 +1,31 @@
-﻿@model IEnumerable<Dating.ViewModels.PeopleViewModels>
-@using Dating.Models
+﻿@model IEnumerable<Dating.Models.Person>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+    <div class="topnav">
+        <input type="text" placeholder="Search People">
+        <input type="button"
+               value="Submit"
+               onclick="location.href='@Url.Action("SearchedPeople", "People")'" />
+    </div>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Person.FirstName)
+            @Html.DisplayNameFor(model => model.FirstName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Person.LastName)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Identify.Age)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Identify.Personality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Identify.Race)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Identify.Gender)
-        </th>*@
+   
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
+
 <tr>
     <th>
-        @Html.DisplayFor(modelItem => item.Person.FirstName)
+        @Html.DisplayFor(modelItem => item.FirstName)
     </th>
-    <th>
-        @Html.DisplayFor(modelItem => item.Person.LastName)
-    </th>
-    @*<th>
-        @Html.DisplayFor(modelItem => item.Identify.Age)
-    </th>
-    <th>
-        @Html.DisplayFor(modelItem => item.Identify.Personality)
-    </th>
-    <th>
-        @Html.DisplayFor(modelItem => item.Identify.Race)
-    </th>
-    <th>
-        @Html.DisplayFor(modelItem => item.Identify.Gender)
-    </th>*@
-
 
     <td>
-        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
         @Html.ActionLink("Back to ", "Details") |
-        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
     </td>
 </tr>
 }
