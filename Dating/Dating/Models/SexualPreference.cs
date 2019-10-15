@@ -29,6 +29,7 @@ namespace Dating.Models
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
     }
     public enum WantedGenders
     {

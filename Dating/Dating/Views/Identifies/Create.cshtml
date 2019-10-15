@@ -7,7 +7,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Identify</h4>
+        <h4>Who I am:</h4>
         <hr />
         <div class="form-group">
             @Html.LabelFor(model => model.Identify.Personality, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -47,7 +47,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Home Page", "Home")
 </div>
 
 @section Scripts {

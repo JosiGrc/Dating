@@ -12,7 +12,7 @@ namespace Dating.ViewModels
 {
     public class PeopleViewModels
     {
-        public Person Person { get; set; }       
+        public Person Person { get; set; }
 
         public Identify Identify { get; set; }
 

@@ -36,7 +36,6 @@ namespace Dating.Controllers
         {
             var personId = User.Identity.GetUserId();
             var personInfo = db.People.Where(c => c.ApplicationId.ToString() == personId).FirstOrDefault();
-            //var searchString = "";
             return View(personInfo);
         }
 
@@ -68,11 +67,12 @@ namespace Dating.Controllers
         // GET: People/Edit/5
         public ActionResult Edit(int? id)
         {
+            Person person = db.People.Find(id);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.People.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -85,6 +85,8 @@ namespace Dating.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Age,Location,ApplicationId")] Person person)
         {
+            person = db.People.Find(person.ApplicationId);
+
             if (ModelState.IsValid)
             {
                 db.Entry(person).State = EntityState.Modified;
@@ -120,48 +122,35 @@ namespace Dating.Controllers
             return RedirectToAction("Details");
         }
 
-        public ActionResult Matches(Identify identify)
+        public ActionResult Matching(Person person, SexualPreference sexualPreference)
         {
-            Person person = new Person();
-            SexualPreference sexualPreference = new SexualPreference();  
+            var loggedInUser = User.Identity.GetUserId();
+            person = db.People.Where(p => p.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
+            sexualPreference = db.SexualPreferences.Where(s => s.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
+            var personsAgePreference = sexualPreference.Age;
 
-            IEnumerable<Person> matchedPeople = db.People;
 
-            if (identify.Age == sexualPreference.Age)
+            foreach(Identify identify in db.Identifies)
             {
-                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
-            }
-            else if(identify.Gender.Equals(sexualPreference.Gender))
-            {
-                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
-            }
-            else if (identify.Personality.Equals(sexualPreference.Personality))
-            {
-                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
-            }
-            else if (identify.Race.Equals(sexualPreference.Race))
-            {
-                person.FirstName = db.People.Where(p => p.ApplicationId == sexualPreference.ApplicationId).ToString();
-            }
+                if (personsAgePreference.Equals(identify.Age))
+                {
+                    var peopleId = db.Identifies.Where(i => i.Age.Equals(personsAgePreference)).Select(i => i.ApplicationId);
+                    var peopleName = db.People.Where(p => p.ApplicationId.Equals(peopleId)).Select(p => p.FirstName).ToString();
+                    person.Matches.Add(peopleName);
+                    return PartialView(person.Matches);
+                }
 
-            return View(matchedPeople);
+            }
+            return PartialView();
+
         }
 
 
         public ActionResult SearchedPeople(string searchString) 
         {
-            Person person = new Person();
 
-            IEnumerable<Person> searchedPeople = db.People;
-
-            foreach(Person item in searchedPeople)
-            {
-                if(!String.IsNullOrEmpty(searchString))
-                {
-                    searchedPeople = db.People.Where(p => p.FirstName.Contains(searchString));
-                    return View(searchedPeople);
-                }
-            }
+            var searchedPeople = db.People.Where(s => s.FirstName.Equals(searchString.ToLower()));
+           
             return View(searchedPeople);
 
         }
@@ -171,9 +160,25 @@ namespace Dating.Controllers
             return View();
         }
 
-        public ActionResult GoogleGeoCodeAPI()
+
+        [HttpGet]
+        public void GoogleGeoCodeAPI(Person person)
         {
-            return View();
+            //var key = AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs;
+            //var zip = person.Location;
+            //var requestUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={zip}&key={IzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs}";
+
+        }
+
+        public void SetDistance()
+        {
+
+        }
+
+        public void FindPeopleInArea()
+        {
+            Person person = new Person();
+            var zip = person.Location;            
         }
     }
 }

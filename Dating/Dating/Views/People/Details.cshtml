@@ -1,10 +1,10 @@
 ﻿@model Dating.Models.Person
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Your profile";
 }
 
-<h2>Details</h2>
+<h2>Info about you</h2>
 
 @*<form method="post" >
     <label for="firstName">Name of the person you might know</label>
@@ -24,7 +24,7 @@
 @*<input type="button" value="Create" onclick="location.href='@Url.Action("SearchedPeople", "People")'" />*@
 
 <div>
-    <h4>Person</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
         @Html.HiddenFor(model => model.Id)
