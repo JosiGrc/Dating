@@ -10,6 +10,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using static System.Net.WebRequestMethods;
 
 namespace Dating.Controllers
 {
@@ -227,11 +228,9 @@ namespace Dating.Controllers
 
 
         [HttpGet]
-        public void GoogleGeoCodeAPI()
+        public void GoogleGeoCodeAPI(Person person)
         {
-            //var key = AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs;
-            //var zip = person.Location;
-            //var requestUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={zip}&key={IzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs}";
+            person.Location = "Https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs";
 
         }
 
