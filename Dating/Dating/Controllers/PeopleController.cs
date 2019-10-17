@@ -148,6 +148,7 @@ namespace Dating.Controllers
             foreach (Identify identify in db.Identifies)
             {
                 Person newPerson = new Person();
+                //person.Matches.Prepend(newPerson);
 
                 if (identify.Age.Equals(sexualPreference.Age) && identify.Gender.Equals(sexualPreference.Gender) && identify.Personality.Equals(sexualPreference.Personality) && identify.Race.Equals(sexualPreference.Race))
                 {
@@ -175,7 +176,24 @@ namespace Dating.Controllers
                 }
                 
             }
-            return View(person.Matches);
+
+            //if (identify.Age.Equals(sexualPreference.Age) && identify.Gender.Equals(sexualPreference.Gender) && identify.Personality.Equals(sexualPreference.Personality) && identify.Race.Equals(sexualPreference.Race))
+            //{
+
+            //}
+                return View(person.Matches);
+        }
+
+        public void FindingPercentageOfMatch()
+        {
+            Identify identify = new Identify();
+            SexualPreference sexualPreference = new SexualPreference();
+            var mainMatch = identify.Age.Equals(sexualPreference.Age) && identify.Gender.Equals(sexualPreference.Gender) && identify.Personality.Equals(sexualPreference.Personality) && identify.Race.Equals(sexualPreference.Race);
+
+            if (mainMatch == true) 
+            {
+
+            }
         }
 
 
