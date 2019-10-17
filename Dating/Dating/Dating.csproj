@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201910041817581_test.Designer.cs">
       <DependentUpon>201910041817581_test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910161906148_changed List matches datatype from string to Person.cs" />
+    <Compile Include="Migrations\201910161906148_changed List matches datatype from string to Person.Designer.cs">
+      <DependentUpon>201910161906148_changed List matches datatype from string to Person.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Identify.cs" />
@@ -342,9 +346,10 @@
     <Content Include="Views\ViewModels\PeopleCreate.cshtml" />
     <Content Include="Views\ViewModels\PeopleCreating.cshtml" />
     <Content Include="Views\Identifies\Create.cshtml" />
-    <Content Include="Views\People\SignalRChatAPI.cshtml" />
     <Content Include="Views\People\SearchedPeople.cshtml" />
+    <Content Include="Views\People\Chat.cshtml" />
     <Content Include="Views\People\Matches.cshtml" />
+    <Content Include="Views\People\NotMatches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -368,6 +373,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910041817581_test.resx">
       <DependentUpon>201910041817581_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910161906148_changed List matches datatype from string to Person.resx">
+      <DependentUpon>201910161906148_changed List matches datatype from string to Person.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

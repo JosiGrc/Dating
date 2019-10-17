@@ -1,5 +1,4 @@
 ﻿using Microsoft.Owin;
-using SignalRChat.Hubs;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(Dating.Startup))]

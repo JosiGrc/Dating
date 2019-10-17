@@ -23,7 +23,7 @@ namespace Dating.Models
         [Display(Name = "My Zipcode is: ")]
         public int Location { get; set; }
 
-        public List<string> Matches { get; set; }
+        public List<Person> Matches { get; set; }
 
 
         [ForeignKey("ApplicationUser")]

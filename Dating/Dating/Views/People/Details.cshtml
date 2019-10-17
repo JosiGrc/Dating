@@ -14,12 +14,17 @@
 </form>*@
 
 
-<div class="topnav">
-    <input type="text" placeholder="Search People">
+@*<div class="topnav">
+    <input type="text" name = "searchString" placeholder="Search People">
     <input type="button"
            value="Submit"
            onclick="location.href='@Url.Action("SearchedPeople", "People")'" />
-</div>
+</div>*@
+
+<form action="SearchedPeople" method="POST">
+    <input type="text" name="searchString" />
+    <input type="submit" value="Search People" />
+</form>
 
 @*<input type="button" value="Create" onclick="location.href='@Url.Action("SearchedPeople", "People")'" />*@
 

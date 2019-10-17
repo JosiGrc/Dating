@@ -122,47 +122,94 @@ namespace Dating.Controllers
             return RedirectToAction("Details");
         }
 
-        public ActionResult Matching(Person person, SexualPreference sexualPreference)
+        //GET: People/Matches/
+        //public ActionResult Matches(Person person, SexualPreference sexualPreference)
+        //{
+        //    var loggedInUser = User.Identity.GetUserId();
+        //    person = db.People.Where(p => p.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
+        //    sexualPreference = db.SexualPreferences.Where(s => s.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
+        //    int personsAgePreference = sexualPreference.Age;
+
+        //    return View(person);
+        //}
+
+
+        //POST: People/Matches
+        //[HttpPost, ActionName("Matches")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Matches(Person person, SexualPreference sexualPreference)
         {
-            var loggedInUser = User.Identity.GetUserId();
-            person = db.People.Where(p => p.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
-            sexualPreference = db.SexualPreferences.Where(s => s.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
-            var personsAgePreference = sexualPreference.Age;
+            string personId = User.Identity.GetUserId();
+            person = db.People.Where(p => p.ApplicationId.Equals(personId)).FirstOrDefault();
+            sexualPreference = db.SexualPreferences.Where(s => s.ApplicationId.Equals(personId)).FirstOrDefault();
+            person.Matches = new List<Person>();
 
 
-            foreach(Identify identify in db.Identifies)
+            foreach (Identify identify in db.Identifies)
             {
-                if (personsAgePreference.Equals(identify.Age))
+                Person newPerson = new Person();
+
+                if (identify.Age.Equals(sexualPreference.Age) && identify.Gender.Equals(sexualPreference.Gender) && identify.Personality.Equals(sexualPreference.Personality) && identify.Race.Equals(sexualPreference.Race))
                 {
-                    var peopleId = db.Identifies.Where(i => i.Age.Equals(personsAgePreference)).Select(i => i.ApplicationId);
-                    var peopleName = db.People.Where(p => p.ApplicationId.Equals(peopleId)).Select(p => p.FirstName).ToString();
-                    person.Matches.Add(peopleName);
-                    return PartialView(person.Matches);
+                    //var ageMatchId = db.Identifies.Where(i => i.Age.Equals(sexualPreference.Age) && i.Gender.Equals(sexualPreference.Gender) && i.Personality.Equals(sexualPreference.Personality) && i.Race.Equals(sexualPreference.Race)).Select(i => i.ApplicationId).FirstOrDefault();
+                    newPerson = db.People.Where(p => p.ApplicationId.Equals(identify.ApplicationId)).FirstOrDefault();
+                    person.Matches.Add(newPerson);
                 }
-
+                else if (sexualPreference.Age.Equals(identify.Age) && sexualPreference.Gender.Equals(identify.Gender) && sexualPreference.Personality.Equals(identify.Personality))
+                {
+                    //var ageMatchId = db.Identifies.Where(i => i.Age.Equals(sexualPreference.Age) && i.Gender.Equals(sexualPreference.Gender) && i.Personality.Equals(sexualPreference.Personality)).Select(i => i.ApplicationId).FirstOrDefault();
+                    newPerson = db.People.Where(p => p.ApplicationId.Equals(identify.ApplicationId)).FirstOrDefault();
+                    person.Matches.Add(newPerson);
+                }
+                else if (sexualPreference.Age.Equals(identify.Age) && sexualPreference.Gender.Equals(identify.Gender))
+                {
+                    //var ageMatchId = db.Identifies.Where(i => i.Age.Equals(sexualPreference.Age) && i.Gender.Equals(sexualPreference.Gender)).Select(i => i.ApplicationId).FirstOrDefault();
+                    newPerson = db.People.Where(p => p.ApplicationId.Equals(identify.ApplicationId)).FirstOrDefault();
+                    person.Matches.Add(newPerson);
+                }
+                else if (sexualPreference.Age.Equals(identify.Age))
+                {
+                    //var ageMatchId = db.Identifies.Where(i => i.Age.Equals(sexualPreference.Age)).Select(i => i.ApplicationId).FirstOrDefault();
+                    newPerson = db.People.Where(p => p.ApplicationId.Equals(identify.ApplicationId)).FirstOrDefault();
+                    person.Matches.Add(newPerson);
+                }
+                
             }
-            return PartialView();
-
+            return View(person.Matches);
         }
 
 
-        public ActionResult SearchedPeople(string searchString) 
-        {
+        public ActionResult SearchedPeople(string searchString)
+        {            
+            var peopelQuery = from p in db.People where ((string.IsNullOrEmpty(searchString) ? true : p.FirstName.Contains(searchString))) select p;
 
-            var searchedPeople = db.People.Where(s => s.FirstName.Equals(searchString.ToLower()));
-           
-            return View(searchedPeople);
+
+            //List<Person> filteredPeople = new List<Person>();
+
+            //foreach(Person person in db.People)
+            //{
+            //    if (person.FirstName.ToLower() == searchString.ToLower())
+            //    {
+            //        filteredPeople.Add(person);
+            //    }
+            //    else if (person.LastName.ToLower().Equals(searchString.ToLower()))
+            //    {
+            //        filteredPeople.Add(person);
+            //    }
+            //}
+
+            return View(peopelQuery);
 
         }
 
-        public ActionResult SignalRChatAPI()
+        public ActionResult Chat()
         {
             return View();
         }
 
 
         [HttpGet]
-        public void GoogleGeoCodeAPI(Person person)
+        public void GoogleGeoCodeAPI()
         {
             //var key = AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs;
             //var zip = person.Location;
