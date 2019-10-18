@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace Dating.Models
 
         [Display(Name = "I am : ")]
         public Personalities Personality { get; set; }
+
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -24,6 +25,9 @@ namespace Dating.Models
 
         [Display(Name = "I am looking for: ")]
         public int Age { get; set; }
+
+        [Display(Name = "Looking for people within : ")]
+        public Distance Miles { get; set; }
 
 
         [ForeignKey("ApplicationUser")]
@@ -51,5 +55,16 @@ namespace Dating.Models
     {
         Introverted,
         Extroverted
+    }
+    public enum Distance
+    {
+        [Description("5 miles")]
+        miles5,
+        [Description("10 miles")]
+        miles10,
+        [Description("15 miles")]
+        miles15,
+        [Description("20 miles")]
+        miles20
     }
 }

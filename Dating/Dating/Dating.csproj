@@ -316,6 +316,14 @@
     <Compile Include="Migrations\201910181845502_changed location name to Zipcode.Designer.cs">
       <DependentUpon>201910181845502_changed location name to Zipcode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910182111039_added a enum property with miles for ditance to within.cs" />
+    <Compile Include="Migrations\201910182111039_added a enum property with miles for ditance to within.Designer.cs">
+      <DependentUpon>201910182111039_added a enum property with miles for ditance to within.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.cs" />
+    <Compile Include="Migrations\201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.Designer.cs">
+      <DependentUpon>201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Geocode.cs" />
@@ -341,6 +349,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Scripts\MapboxApi.js" />
     <Content Include="Scripts\signalr.js" />
     <Content Include="Scripts\signalr.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -431,6 +440,7 @@
     <Content Include="Views\People\SearchedPeople.cshtml" />
     <Content Include="Views\People\Chat.cshtml" />
     <Content Include="Views\People\Matches.cshtml" />
+    <Content Include="Views\People\Mapbox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -464,6 +474,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910181845502_changed location name to Zipcode.resx">
       <DependentUpon>201910181845502_changed location name to Zipcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910182111039_added a enum property with miles for ditance to within.resx">
+      <DependentUpon>201910182111039_added a enum property with miles for ditance to within.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.resx">
+      <DependentUpon>201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

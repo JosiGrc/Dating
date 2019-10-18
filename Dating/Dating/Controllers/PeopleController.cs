@@ -175,6 +175,18 @@ namespace Dating.Controllers
                 return View(person.Matches);
         }
 
+        public void PeopleInArea(Person person, SexualPreference sexualPreference)
+        {
+            string personId = User.Identity.GetUserId();
+            person = db.People.Where(p => p.ApplicationId.Equals(personId)).FirstOrDefault();
+            sexualPreference = db.SexualPreferences.Where(s => s.ApplicationId.Equals(personId)).FirstOrDefault();
+            
+            var area = Geolocate(person.Zipcode);
+            //var areaToSearch = area + sexualPreference.Miles;
+
+        }
+
+
         public void FindingPercentageOfMatch()
         {
             Identify identify = new Identify();
@@ -216,22 +228,6 @@ namespace Dating.Controllers
             return View();
         }
 
-        public void PersonsLocation()
-        {
-            //var locationData = GetLocation("da10b68dea6a42d58ea8fea66a57b886").Result;
-        }
-
-
-        //[HttpGet]
-        //public void GetLocation(string key)
-        //{
-        //    key = "AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs";
-
-        //    var result = new WebClient().DownloadString(requestUri);
-        //    GeoCode geocode = JsonConvert.DeserializeObject<GeoCode>(result);
-        //    return geocode;
-
-        //}
 
         public string ConvertAddressToGoogleFormat(Person person)
         {
@@ -248,8 +244,10 @@ namespace Dating.Controllers
             return geocode;
         }
 
+        public void MapboxTest()
+        {
 
-
-
+        }
+                              
     }
 }
