@@ -1,15 +1,19 @@
 ﻿using Dating.Models;
 using Dating.ViewModels;
+using GoogleMapsApi.Entities.Common;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using static Dating.Models.Geocode;
 using static System.Net.WebRequestMethods;
 
 namespace Dating.Controllers
@@ -123,21 +127,7 @@ namespace Dating.Controllers
             return RedirectToAction("Details");
         }
 
-        //GET: People/Matches/
-        //public ActionResult Matches(Person person, SexualPreference sexualPreference)
-        //{
-        //    var loggedInUser = User.Identity.GetUserId();
-        //    person = db.People.Where(p => p.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
-        //    sexualPreference = db.SexualPreferences.Where(s => s.ApplicationId.Equals(loggedInUser)).FirstOrDefault();
-        //    int personsAgePreference = sexualPreference.Age;
-
-        //    return View(person);
-        //}
-
-
-        //POST: People/Matches
-        //[HttpPost, ActionName("Matches")]
-        //[ValidateAntiForgeryToken]
+    
         public ActionResult Matches(Person person, SexualPreference sexualPreference)
         {
             string personId = User.Identity.GetUserId();
@@ -226,23 +216,40 @@ namespace Dating.Controllers
             return View();
         }
 
-
-        [HttpGet]
-        public void GoogleGeoCodeAPI(Person person)
+        public void PersonsLocation()
         {
-            person.Location = "Https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs";
-
+            //var locationData = GetLocation("da10b68dea6a42d58ea8fea66a57b886").Result;
         }
 
-        public void SetDistance()
-        {
 
+        //[HttpGet]
+        //public void GetLocation(string key)
+        //{
+        //    key = "AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs";
+
+        //    var result = new WebClient().DownloadString(requestUri);
+        //    GeoCode geocode = JsonConvert.DeserializeObject<GeoCode>(result);
+        //    return geocode;
+
+        //}
+
+        public string ConvertAddressToGoogleFormat(Person person)
+        {
+            string googleFormatAddress = person.Zipcode.ToString();
+            return googleFormatAddress;
         }
 
-        public void FindPeopleInArea()
+        public Geocode Geolocate(int zipcode)
         {
-            Person person = new Person();
-            var zip = person.Location;            
+            string key = "AIzaSyAjvSmZAIx5ytoXJmdVGlzqj8M76zlWKWs";
+            var requestUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={zipcode}&key={key}";
+            var result = new WebClient().DownloadString(requestUrl);
+            Geocode geocode = JsonConvert.DeserializeObject<Geocode>(result);
+            return geocode;
         }
+
+
+
+
     }
 }

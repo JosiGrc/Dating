@@ -21,7 +21,9 @@ namespace Dating.Models
         public string LastName { get; set; }
 
         [Display(Name = "My Zipcode is: ")]
-        public int Location { get; set; }
+        public int Zipcode { get; set; }
+        public double longitute { get; set; }
+        public double latitude { get; set; }
 
         public List<Person> Matches { get; set; }
 

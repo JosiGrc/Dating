@@ -290,7 +290,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\GoogleGeoCodeAPIsController.cs" />
+    <Compile Include="Controllers\GeocodesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdentifiesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -308,9 +308,17 @@
     <Compile Include="Migrations\201910161906148_changed List matches datatype from string to Person.Designer.cs">
       <DependentUpon>201910161906148_changed List matches datatype from string to Person.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.cs" />
+    <Compile Include="Migrations\201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.Designer.cs">
+      <DependentUpon>201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910181845502_changed location name to Zipcode.cs" />
+    <Compile Include="Migrations\201910181845502_changed location name to Zipcode.Designer.cs">
+      <DependentUpon>201910181845502_changed location name to Zipcode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\GoogleGeocodeAPI.cs" />
+    <Compile Include="Models\Geocode.cs" />
     <Compile Include="Models\Identify.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -450,6 +458,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910161906148_changed List matches datatype from string to Person.resx">
       <DependentUpon>201910161906148_changed List matches datatype from string to Person.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.resx">
+      <DependentUpon>201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910181845502_changed location name to Zipcode.resx">
+      <DependentUpon>201910181845502_changed location name to Zipcode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

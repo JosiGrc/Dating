@@ -6,11 +6,18 @@ using System.Web.Http;
 
 namespace Dating.App_Start
 {
-    public class WebApiConfig
+    public static class WebApiConfig
     {
-        //internal static void Register(HttpConfiguration obj)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public static void Register(HttpConfiguration config)
+        {
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "GeocodeApi",
+                routeTemplate: "api/{People}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+        }
     }
 }
