@@ -223,6 +223,39 @@ namespace Dating.Controllers
 
         }
 
+        public ActionResult PersonBio(Person person, Person matchedPeople, List<Person> Matches)
+        {
+            var userId = User.Identity.GetUserId();
+            person = db.People.Where(p => p.ApplicationId == userId).FirstOrDefault();
+
+            foreach (Person item in Matches)
+            {
+                matchedPeople = db.People.Where(p => p.ApplicationId == person.ApplicationId).FirstOrDefault();
+            }
+
+            return View(matchedPeople);           
+
+        }
+
+        //public static class IEnumerableExtension
+        //{
+        //    public static IEnumerable<T> Safe<T>(this IEnumerable<T> source)
+        //    {
+        //        if (source == null)
+        //        {
+        //            yield break;
+        //        }
+
+        //        foreach (var item in source)
+        //        {
+        //            yield return item;
+        //        }
+        //    }
+        //}
+
+
+
+
         public ActionResult Chat()
         {
             return View();
@@ -244,9 +277,9 @@ namespace Dating.Controllers
             return geocode;
         }
 
-        public void MapboxTest()
+        public ActionResult Mapbox()
         {
-
+            return View();
         }
                               
     }

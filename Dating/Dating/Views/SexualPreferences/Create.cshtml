@@ -45,7 +45,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.SexualPreference.Miles, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Distance", EnumHelper.GetSelectList(typeof(Distance)), "What's your personality?", new { @class = "form-control" })
+            @Html.DropDownList("Distance", EnumHelper.GetSelectList(typeof(Distance)), "How far you willing to travel?", new { @class = "form-control" })
         </div>
     </div>
 

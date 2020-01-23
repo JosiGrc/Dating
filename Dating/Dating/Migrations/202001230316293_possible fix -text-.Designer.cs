@@ -7,13 +7,13 @@ namespace Dating.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class test : IMigrationMetadata
+    public sealed partial class possiblefixtext : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(test));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(possiblefixtext));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910041817581_test"; }
+            get { return "202001230316293_possible fix -text-"; }
         }
         
         string IMigrationMetadata.Source

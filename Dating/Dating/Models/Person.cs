@@ -27,6 +27,11 @@ namespace Dating.Models
 
         public List<Person> Matches { get; set; }
 
+        public Person()
+        {
+            this.Matches = new List<Person>();
+        }
+
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }

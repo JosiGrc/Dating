@@ -300,29 +300,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
-    <Compile Include="Migrations\201910041817581_test.cs" />
-    <Compile Include="Migrations\201910041817581_test.Designer.cs">
-      <DependentUpon>201910041817581_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910161906148_changed List matches datatype from string to Person.cs" />
-    <Compile Include="Migrations\201910161906148_changed List matches datatype from string to Person.Designer.cs">
-      <DependentUpon>201910161906148_changed List matches datatype from string to Person.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.cs" />
-    <Compile Include="Migrations\201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.Designer.cs">
-      <DependentUpon>201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910181845502_changed location name to Zipcode.cs" />
-    <Compile Include="Migrations\201910181845502_changed location name to Zipcode.Designer.cs">
-      <DependentUpon>201910181845502_changed location name to Zipcode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910182111039_added a enum property with miles for ditance to within.cs" />
-    <Compile Include="Migrations\201910182111039_added a enum property with miles for ditance to within.Designer.cs">
-      <DependentUpon>201910182111039_added a enum property with miles for ditance to within.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.cs" />
-    <Compile Include="Migrations\201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.Designer.cs">
-      <DependentUpon>201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.cs</DependentUpon>
+    <Compile Include="Migrations\202001230316293_possible fix -text-.cs" />
+    <Compile Include="Migrations\202001230316293_possible fix -text-.Designer.cs">
+      <DependentUpon>202001230316293_possible fix -text-.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -441,6 +421,7 @@
     <Content Include="Views\People\Chat.cshtml" />
     <Content Include="Views\People\Matches.cshtml" />
     <Content Include="Views\People\Mapbox.cshtml" />
+    <Content Include="Views\People\PersonBio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -463,23 +444,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910041817581_test.resx">
-      <DependentUpon>201910041817581_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910161906148_changed List matches datatype from string to Person.resx">
-      <DependentUpon>201910161906148_changed List matches datatype from string to Person.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.resx">
-      <DependentUpon>201910172136015_added geocode model with the needed prprties, also added latitude and logitude propertes to person model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910181845502_changed location name to Zipcode.resx">
-      <DependentUpon>201910181845502_changed location name to Zipcode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910182111039_added a enum property with miles for ditance to within.resx">
-      <DependentUpon>201910182111039_added a enum property with miles for ditance to within.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.resx">
-      <DependentUpon>201910182125236_deleted the distance property in indetify model and moved it to the Sexualpreference table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001230316293_possible fix -text-.resx">
+      <DependentUpon>202001230316293_possible fix -text-.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
