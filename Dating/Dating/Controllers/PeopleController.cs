@@ -223,17 +223,19 @@ namespace Dating.Controllers
 
         }
 
-        public ActionResult PersonBio(Person person, Person matchedPeople, List<Person> Matches)
+        public ActionResult PersonBio(Person person, List<Person> Matches)
         {
             var userId = User.Identity.GetUserId();
             person = db.People.Where(p => p.ApplicationId == userId).FirstOrDefault();
 
-            foreach (Person item in Matches)
+            foreach (Person item in person.Matches)
             {
+                Person matchedPeople = new Person();
                 matchedPeople = db.People.Where(p => p.ApplicationId == person.ApplicationId).FirstOrDefault();
+                return View(matchedPeople);
             }
 
-            return View(matchedPeople);           
+            return View();
 
         }
 
